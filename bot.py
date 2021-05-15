@@ -23,13 +23,11 @@ class Bot(commands.Bot):
 
     @property
     def token(self):
-        f = open('storage/_token')
-        try:
-            if self.is_closed:
-                return f.read()
+        if not self.is_closed:
+            return
 
-        finally:
-            f.close()
+        with open('storage/_token') as f:
+            return f.read()
 
 
 client = Bot('-')
