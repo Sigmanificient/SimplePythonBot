@@ -1,8 +1,11 @@
 import platform
 import time
+from datetime import datetime
 
 import discord
 from discord.ext import commands, tasks
+
+LOG_FORMAT = '%d/%b/%Y:%H:%M:%S'
 
 
 class Bot(commands.Bot):
@@ -16,7 +19,11 @@ class Bot(commands.Bot):
         self.remove_command('help')
 
     async def on_ready(self):
-        print(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
+        self.log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
+
+    @staticmethod
+    def log(*args):
+        print(f"[{datetime.now().strftime(LOG_FORMAT)}]", *args)
 
     @property
     def is_local(self):
