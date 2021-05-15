@@ -6,6 +6,10 @@ class Bot(commands.Bot):
 
     def __init__(self, **kwargs):
         super(Bot, self).__init__(**kwargs)
+        self.remove_command('help')
+
+    async def on_ready(self):
+        print("Connected as Bot:", self.user)
 
     @property
     def token(self):
