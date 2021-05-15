@@ -1,3 +1,4 @@
+import os
 import platform
 import time
 from datetime import datetime
@@ -17,6 +18,16 @@ class Bot(commands.Bot):
         )
 
         self.remove_command('help')
+        self.log('Loading bot extensions')
+
+        for filename in os.listdir("cogs"):  # Loads every extensions.
+            if not filename.endswith(".py"):
+                continue
+
+            self.load_extension(f"cogs.{filename[:-3]}")
+            self.log('-', filename)
+
+        self.log(len(self.cogs), 'extensions loaded')
 
     async def on_ready(self):
         self.log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
