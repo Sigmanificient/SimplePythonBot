@@ -1,4 +1,5 @@
 import platform
+import time
 
 import discord
 from discord.ext import commands, tasks
@@ -15,7 +16,7 @@ class Bot(commands.Bot):
         self.remove_command('help')
 
     async def on_ready(self):
-        print("Connected as Bot:", self.user)
+        print(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
 
     @property
     def is_local(self):
