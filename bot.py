@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 
 LOG_FORMAT = '%d/%b/%Y:%H:%M:%S'
 
