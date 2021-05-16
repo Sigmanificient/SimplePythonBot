@@ -1,3 +1,4 @@
+from time import perf_counter
 from discord.ext import commands
 
 
@@ -33,6 +34,32 @@ class Utils(commands.Cog):
                 )
 
         await ctx.send(embed=_embed)
+
+    @commands.command(
+        name='ping',
+        aliases=('latency', 'lat', 'ms'),
+        brief='Pong !'
+    )
+    @commands.cooldown(2, 60, commands.BucketType.user)
+    async def ping(self, ctx):
+        """ Get the latency of the client converted in milliseconds.
+        An dynamically colored ball will show in the image in function of the ping.
+        Give also worst, best and daily average ping """
+        latencies: dict = {"API": self.client.latency}
+
+        marker: float = perf_counter()
+        ping_message = await ctx.send('> pinging...')
+        latencies["BOT"] = perf_counter() - marker
+
+        _embed = self.client.embed(
+            title=f'{ctx.author.name} Ponged !',
+            description="The bot, bd & API latency"
+        )
+
+        for k, v in latencies.items():
+            _embed.add_field(name=f"{k} latency", value=f'> `{v * 1e3:,.2f} ms`')
+
+        await ping_message.edit(content=' ', embed=_embed)
 
 
 def setup(client):
