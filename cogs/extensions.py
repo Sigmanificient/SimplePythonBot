@@ -71,6 +71,18 @@ class Extensions(commands.Cog):
         Unloading will remove all extension commands and data from the bot """
         await self.alter_cogs(ctx, cog)
 
+    @commands.command(
+        name='reload',
+        brief="Reload an active extension"
+    )
+    @commands.is_owner()
+    async def reload_extension(self, ctx, cog):
+        """ Reload the given extension ( cog ).
+        The command can only be executed by the bot owner
+        An not existing extension will return 'not been loaded' error
+        Reload an extension will apply newest change to the code """
+        await self.alter_cogs(ctx, cog)
+
 
 def setup(client):
     client.add_cog(Extensions(client))
