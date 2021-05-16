@@ -153,6 +153,13 @@ class Utils(commands.Cog):
 
         await ctx.send(embed=invite_embed)
 
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx: commands.context, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            await ctx.send(
+                f"> *Please wait* `{error.retry_after:.2f}` *seconds before using that command again.*"
+            )
+
 
 def setup(client):
     client.add_cog(Utils(client))
