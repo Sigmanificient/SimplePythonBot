@@ -32,6 +32,14 @@ class Bot(commands.Bot):
     async def on_ready(self):
         self.log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
 
+    def embed(self, **kwargs):
+        _embed = discord.Embed(**kwargs)
+
+        return _embed.set_footer(
+            text=f'{self.user.name} - {self.command_prefix}help for more information',
+            icon_url=self.user.avatar_url
+        )
+
     @staticmethod
     def log(*args):
         print(f"[{datetime.now().strftime(LOG_FORMAT)}]", *args)
