@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 LOG_FORMAT = '%d/%b/%Y:%H:%M:%S'
 
@@ -31,6 +31,17 @@ class Bot(commands.Bot):
 
     async def on_ready(self):
         self.log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
+        self.set_activity.start()
+
+    @tasks.loop(seconds=10)
+    async def set_activity(self):
+        await self.change_presence(
+            status=discord.Status.online,
+            activity=discord.Activity(
+                type=discord.ActivityType.watching,
+                name=f"{self.command_prefix}help ◈ ping: {self.latency * 1e3:.2f} ms"
+            )
+        )
 
     def embed(self, **kwargs):
         _embed = discord.Embed(**kwargs)
