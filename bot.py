@@ -29,9 +29,12 @@ class Bot(commands.Bot):
 
         self.log(len(self.cogs), 'extensions loaded')
 
-    async def on_ready(self):
+    async def on_connect(self):
         self.log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
         self.set_activity.start()
+
+    async def on_ready(self):
+        self.log(f"Ready after {time.perf_counter():,.3f}s")
 
     @tasks.loop(seconds=10)
     async def set_activity(self):
