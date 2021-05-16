@@ -14,7 +14,7 @@ class Dev(commands.Cog):
         aliases=('pan',),
         brief="Some data about the panel"
     )
-    # @commands.cooldown(2, 60, commands.BucketType.user)
+    @commands.cooldown(2, 60, commands.BucketType.user)
     async def panel_stats(self, ctx):
         cols: tuple = ("blue", "green", "yellow", "orange", "red")
         mb: int = 1024 ** 2
