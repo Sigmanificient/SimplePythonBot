@@ -135,6 +135,24 @@ class Utils(commands.Cog):
 
         await ctx.send(embed=_embed)
 
+    @commands.command(
+        name="invite",
+        aliases=("inv", "i"),
+        brief="A link to invite the bot"
+    )
+    async def invite(self, ctx):
+        invite_embed = self.client.embed(
+            title="Invite the Bot !",
+            description='\n'.join((
+                "> Click this link to invite this bot on your servers !",
+                "You need to have permissions on the server to use the link",
+                "[invite me now](https://discord.com/api/oauth2/authorize?client_"
+                f"id={self.client.user.id}&permissions=8&scope=bot)"
+            ))
+        )
+
+        await ctx.send(embed=invite_embed)
+
 
 def setup(client):
     client.add_cog(Utils(client))
