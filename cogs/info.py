@@ -1,4 +1,5 @@
 from time import perf_counter
+from platform import python_version
 
 import discord
 from discord.ext import commands
@@ -109,6 +110,30 @@ class Utils(commands.Cog):
         )
 
         await ctx.send(embed=embed)
+
+    @commands.command(
+        name='bot',
+        brief="Display the bot information"
+    )
+    async def info_bot(self, ctx):
+        """ Display the bot information """
+        _embed = self.client.embed(
+            title=f'{self.client.user.name} Bot Information',
+            description='\n'.join((
+                'This bot have been created, coded and is owned by Sigmanificient#3301',
+                self.client.user.created_at.strftime("> **Creation date** : %A %d %B %Y at %H:%M")
+            ))
+        )
+
+        for key, val in {
+            'Python': python_version(),
+            'Discord': discord.__version__,
+            'Commands': len(self.client.commands),
+            'Extensions': len(self.client.cogs)
+        }.items():
+            _embed.add_field(name=key, value=f'> `{val}`', inline=True)
+
+        await ctx.send(embed=_embed)
 
 
 def setup(client):
