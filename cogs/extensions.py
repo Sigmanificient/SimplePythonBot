@@ -59,6 +59,18 @@ class Extensions(commands.Cog):
         An not existing extension will return 'cannot be loaded' error """
         await self.alter_cogs(ctx, cog)
 
+    @commands.command(
+        name='unload',
+        brief="Unload an active extension"
+    )
+    @commands.is_owner()
+    async def unload_extension(self, ctx, cog):
+        """ Unload the given extension ( cog ).
+        The command can only be executed by the bot owner
+        An not existing extension will return 'not been loaded' error
+        Unloading will remove all extension commands and data from the bot """
+        await self.alter_cogs(ctx, cog)
+
 
 def setup(client):
     client.add_cog(Extensions(client))
