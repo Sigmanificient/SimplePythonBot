@@ -5,3 +5,6 @@ Make sure to follow the requirements in `requirements.txt`
 The bot token should be in a `storage/_token` file.
 
 The Storage directory can also contain db & json.
+
+## Default commands
+- `help`, `bot`, `invite`, `ping`, `user`, `panel`, `load`, `unload`, `reload`
