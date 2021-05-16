@@ -14,7 +14,7 @@ class Extensions(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    async def modify_cog(self, ctx, cog):
+    async def alter_cogs(self, ctx, cog):
         _started: float = time()
         _type: str = ctx.command.name
         cog_name: str = cog.capitalize()
@@ -47,6 +47,17 @@ class Extensions(commands.Cog):
 
         finally:
             await ctx.send(embed=_embed)
+
+    @commands.command(
+        name='load',
+        brief="Load an extension on the bot"
+    )
+    @commands.is_owner()
+    async def load_extension(self, ctx, cog):
+        """ load the given extension ( cog ) given.
+        The command can only be executed by the bot owner
+        An not existing extension will return 'cannot be loaded' error """
+        await self.alter_cogs(ctx, cog)
 
 
 def setup(client):
