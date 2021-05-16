@@ -1,3 +1,4 @@
+from os import listdir
 from time import time
 
 from discord import Color
@@ -82,6 +83,29 @@ class Extensions(commands.Cog):
         An not existing extension will return 'not been loaded' error
         Reload an extension will apply newest change to the code """
         await self.alter_cogs(ctx, cog)
+
+    @commands.command(
+        name="extensions",
+        aliases=['ext'],
+        brief="List all extensions"
+    )
+    async def list_cogs(self, ctx):
+        """ Returns a list of all enabled and disabled extensions. """
+        embed = self.client.embed(
+            title="All extensions",
+            description='>>> %s' % ', '.join(STATUS)
+        )
+
+        cogs = self.client.cogs.keys()
+
+        for filename in listdir('./cogs'):
+            if filename.endswith('.py'):
+                embed.add_field(
+                    name=filename,
+                    value=STATUS[filename[:-3].capitalize() in cogs]
+                )
+
+        await ctx.send(embed=embed)
 
 
 def setup(client):
