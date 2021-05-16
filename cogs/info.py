@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 
-class Utils(commands.Cog):
+class Info(commands.Cog):
     """ A template cog """
     hidden: bool = False
 
@@ -162,4 +162,4 @@ class Utils(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Utils(client))
+    client.add_cog(Info(client))
