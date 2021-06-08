@@ -1,4 +1,11 @@
-# Simple Cog python Bot [![CodeFactor](https://www.codefactor.io/repository/github/sigmanificient/simplepythonbot/badge)](https://www.codefactor.io/repository/github/sigmanificient/simplepythonbot)
+# Simple Cog python Bot
+
+[![CodeFactor](https://www.codefactor.io/repository/github/sigmanificient/simplepythonbot/badge)](https://www.codefactor.io/repository/github/sigmanificient/simplepythonbot)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Sigmanificient/SimplePythonBot)
+![GitHub repo size](https://img.shields.io/github/repo-size/Sigmanificient/SimplePythonBot)
+![Lines of code](https://img.shields.io/tokei/lines/github/Sigmanificient/SimplePythonBot)
+![GitHub last commit](https://img.shields.io/github/last-commit/Sigmanificient/SimplePythonBot)
+![Github](https://shields.io/github/license/Sigmanificient/SimplePythonBot)
 
 Make sure to follow the requirements in `requirements.txt`
 
