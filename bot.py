@@ -3,6 +3,7 @@ import platform
 import time
 from datetime import datetime
 
+import dotenv
 import discord
 from discord.ext import commands, tasks
 
@@ -64,11 +65,10 @@ class Bot(commands.Bot):
 
     @property
     def token(self):
-        if not self.is_closed:
+        if self.is_ready():
             return
 
-        with open('storage/_token') as f:
-            return f.read()
+        return dotenv.dotenv_values('.env').get('TOKEN')
 
 
 client = Bot('-')

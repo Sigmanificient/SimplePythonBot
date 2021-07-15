@@ -1,3 +1,2 @@
 .idea
-storage/_token
-
+.env

@@ -9,7 +9,10 @@
 
 Make sure to follow the requirements in `requirements.txt`
 
-The bot token should be in a `storage/_token` file.
+The bot token should be in a `.env` file such as the `.env.example` file:
+```dotenv
+TOKEN=YOUR_BOT_TOKEN
+```
 
 The Storage directory can also contain db & json.
 
