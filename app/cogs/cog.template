@@ -3,6 +3,7 @@ from app.bot import Bot
 
 
 class TemplateCog(commands.Cog):
+
     """A template cog."""
 
     def __init__(self, client: Bot) -> None:

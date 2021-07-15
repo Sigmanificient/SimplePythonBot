@@ -8,6 +8,7 @@ if TYPE_CHECKING:
 
 
 class Embed(discord.Embed):
+
     """A Embed wrapper class."""
 
     @classmethod

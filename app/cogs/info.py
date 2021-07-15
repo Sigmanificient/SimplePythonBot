@@ -9,6 +9,7 @@ from app.utils.embed import Embed
 
 
 class Info(commands.Cog):
+
     """Group of commands related to information on the bot."""
 
     def __init__(self, client: Bot) -> None:

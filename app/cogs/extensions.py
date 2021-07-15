@@ -12,6 +12,7 @@ STATUS: tuple = ("🟥 disabled", "🟩 active")
 
 
 class Extensions(commands.Cog):
+
     """One extension to rule them all."""
 
     def __init__(self, client: Bot):
