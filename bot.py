@@ -14,7 +14,7 @@ class Bot(commands.Bot):
 
     def __init__(self, prefix):
         super(Bot, self).__init__(
-            command_prefix=f'{"local" * self.is_local}{prefix}',
+            command_prefix=prefix,
             intents=discord.Intents.all()
         )
 
@@ -58,10 +58,6 @@ class Bot(commands.Bot):
     @staticmethod
     def log(*args):
         print(f"[{datetime.now().strftime(LOG_FORMAT)}]", *args)
-
-    @property
-    def is_local(self):
-        return platform.system() == "Windows"
 
     @property
     def token(self):
