@@ -61,6 +61,7 @@ class Extensions(commands.Cog):
     @commands.is_owner()
     async def load_extension(self, ctx: commands.Context, cog: str) -> None:
         """ load the given extension ( cog ) given.
+
         The command can only be executed by the bot owner
         An not existing extension will return 'cannot be loaded' error """
         await self.alter_cogs(ctx, cog)
@@ -72,6 +73,7 @@ class Extensions(commands.Cog):
     @commands.is_owner()
     async def unload_extension(self, ctx: commands.Context, cog: str) -> None:
         """ Unload the given extension ( cog ).
+
         The command can only be executed by the bot owner
         An not existing extension will return 'not been loaded' error
         Unloading will remove all extension commands and data from the bot """
@@ -84,6 +86,7 @@ class Extensions(commands.Cog):
     @commands.is_owner()
     async def reload_extension(self, ctx: commands.Context, cog: str) -> None:
         """ Reload the given extension ( cog ).
+
         The command can only be executed by the bot owner
         An not existing extension will return 'not been loaded' error
         Reload an extension will apply newest change to the code """
@@ -97,6 +100,7 @@ class Extensions(commands.Cog):
     @commands.is_owner()
     async def list_cogs(self, ctx: commands.Context) -> None:
         """Returns a list of all enabled and disabled extensions."""
+
         cogs_list_embed: Embed = self.client.embed(
             title="All extensions",
             description='>>> %s' % '\n'.join(STATUS)
@@ -114,6 +118,7 @@ class Extensions(commands.Cog):
     @staticmethod
     async def on_command_error(ctx: commands.Context, error: Exception) -> None:
         """Handle is owner errors."""
+
         if isinstance(error, commands.NotOwner):
             await ctx.send("You do not own this bot.")
 
