@@ -60,11 +60,11 @@ class Info(commands.Cog):
         ping_embed.add_field(name="API latency", value=f"> `{self.client.latency * 1e3:,.2f}` ms")
 
         marker: float = perf_counter()
-        await ctx.send(embed=ping_embed)
+        message = await ctx.send(embed=ping_embed)
 
         elapsed: float = perf_counter() - marker
         ping_embed.add_field(name="Bot latency", value=f"> `{elapsed * 1e3:,.2f}` ms")
-        await ping_embed.edit(embed=ping_embed)
+        await message.edit(embed=ping_embed)
 
     @commands.command(
         name='bot',
