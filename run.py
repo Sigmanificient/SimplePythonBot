@@ -2,7 +2,7 @@ from app.bot import Bot
 
 
 def main():
-    client = Bot('-')
+    client = Bot('&')
     client.run()
 
 

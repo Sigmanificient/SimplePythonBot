@@ -5,6 +5,7 @@ import time
 import dotenv
 import discord
 from discord.ext import commands, tasks
+from app.utils.embed import Embed
 from app.utils.logging import log
 
 
@@ -28,6 +29,8 @@ class Bot(commands.Bot):
 
         log(len(self.cogs), 'extensions loaded')
 
+        self.embed = Embed.load(self)
+
     def run(self):
         super().run(dotenv.dotenv_values('.env').get('TOKEN'))
 
@@ -46,12 +49,4 @@ class Bot(commands.Bot):
                 type=discord.ActivityType.watching,
                 name=f"{self.command_prefix}help ◈ ping: {self.latency * 1e3:.2f} ms"
             )
-        )
-
-    def embed(self, **kwargs):
-        _embed = discord.Embed(**kwargs)
-
-        return _embed.set_footer(
-            text=f'{self.user.name} - {self.command_prefix}help for more information',
-            icon_url=self.user.avatar_url
         )
