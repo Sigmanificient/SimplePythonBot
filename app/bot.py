@@ -42,6 +42,10 @@ class Bot(commands.Bot):
         except commands.ExtensionFailed as error:
             warn(f"Could not load component '{name}' due to {error.__cause__}")
 
+    def unload_extension(self, name, *_) -> None:
+        """Unloads a given extension."""
+        super().unload_extension(f"app.cogs.{name}")
+
     def run(self) -> None:
         """Starting client with the token given in dotenv."""
         super().run(dotenv.dotenv_values('.env').get('TOKEN'))

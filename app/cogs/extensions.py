@@ -23,11 +23,13 @@ class Extensions(commands.Cog):
         marker: float = perf_counter()
         _type: str = ctx.command.name
         cog_name: str = cog.capitalize()
-        cog: str = f'cogs.{cog.lower()}'
+        cog: str = cog.lower()
 
         result_embed: Optional[Embed] = None
 
         try:
+            print(cog)
+
             if _type != 'load':
                 self.client.unload_extension(cog)
 
