@@ -18,12 +18,11 @@ TOKEN=YOUR_BOT_TOKEN
 The Storage directory can also contain db & json.
 
 ## Default commands
-- `help`, `bot`, `invite`, `ping`, `user`, `panel`, `load`, `unload`, `reload`
-
+-    `help`, `bot`, `invite`, `ping`, `user`, `panel`, `load`, `unload`, `reload`
 
 ## Clear logs
 Everything is kept clear with common log format
-```
+```log
 [17/May/2021:00:44:27] Loading bot extensions
 [17/May/2021:00:44:27] - dev.py
 [17/May/2021:00:44:27] - extensions.py
