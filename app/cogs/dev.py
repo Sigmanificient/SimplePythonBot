@@ -39,7 +39,7 @@ class Dev(commands.Cog):
             ))
         )
 
-        disk = psutil.disk_usage('.')
+        disk = psutil.disk_usage('')
         percent: int = 100 * (disk.used / disk.total)
         _embed.add_field(
             name=f":{cols[int(percent // 20)]}_square: __DISK__",

@@ -21,11 +21,11 @@ class Bot(commands.Bot):
         self.remove_command('help')
         self.log('Loading bot extensions')
 
-        for filename in os.listdir("cogs"):  # Loads every extensions.
+        for filename in os.listdir("app/cogs"):  # Loads every extensions.
             if not filename.endswith(".py"):
                 continue
 
-            self.load_extension(f"cogs.{filename[:-3]}")
+            self.load_extension(f"app.cogs.{filename[:-3]}")
             self.log('-', filename)
 
         self.log(len(self.cogs), 'extensions loaded')
@@ -65,7 +65,3 @@ class Bot(commands.Bot):
             return
 
         return dotenv.dotenv_values('.env').get('TOKEN')
-
-
-client = Bot('-')
-client.run(client.token)  # Starts the bot
