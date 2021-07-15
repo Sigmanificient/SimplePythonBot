@@ -1,13 +1,11 @@
 import os
-import platform
 import time
-from datetime import datetime
+
 
 import dotenv
 import discord
 from discord.ext import commands, tasks
-
-LOG_FORMAT = '%d/%b/%Y:%H:%M:%S'
+from app.utils.logging import log
 
 
 class Bot(commands.Bot):
@@ -19,23 +17,26 @@ class Bot(commands.Bot):
         )
 
         self.remove_command('help')
-        self.log('Loading bot extensions')
+        log('Loading bot extensions')
 
         for filename in os.listdir("app/cogs"):  # Loads every extensions.
             if not filename.endswith(".py"):
                 continue
 
             self.load_extension(f"app.cogs.{filename[:-3]}")
-            self.log('-', filename)
+            log('-', filename)
 
-        self.log(len(self.cogs), 'extensions loaded')
+        log(len(self.cogs), 'extensions loaded')
+
+    def run(self):
+        super().run(dotenv.dotenv_values('.env').get('TOKEN'))
 
     async def on_connect(self):
-        self.log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
+        log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
         self.set_activity.start()
 
     async def on_ready(self):
-        self.log(f"Ready after {time.perf_counter():,.3f}s")
+        log(f"{self.user} Ready after {time.perf_counter():,.3f}s")
 
     @tasks.loop(seconds=10)
     async def set_activity(self):
@@ -54,14 +55,3 @@ class Bot(commands.Bot):
             text=f'{self.user.name} - {self.command_prefix}help for more information',
             icon_url=self.user.avatar_url
         )
-
-    @staticmethod
-    def log(*args):
-        print(f"[{datetime.now().strftime(LOG_FORMAT)}]", *args)
-
-    @property
-    def token(self):
-        if self.is_ready():
-            return
-
-        return dotenv.dotenv_values('.env').get('TOKEN')
