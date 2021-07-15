@@ -1,8 +1,9 @@
 from app.bot import Bot
 
 
-def main():
-    client = Bot('&')
+def main() -> None:
+    """Entry point to load the app."""
+    client: Bot = Bot('&')
     client.run()
 
 

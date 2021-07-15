@@ -1,12 +1,14 @@
 from discord.ext import commands
+from app.bot import Bot
 
 
 class TemplateCog(commands.Cog):
-    """ A template cog """
+    """A template cog."""
 
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, client: Bot) -> None:
+        """Initialise the template cog."""
+        self.client: Bot = client
 
 
-def setup(client):
+def setup(client: Bot) -> None:
     client.add_cog(TemplateCog(client))
