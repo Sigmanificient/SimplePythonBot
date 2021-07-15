@@ -1,5 +1,6 @@
 # Simple Cog python Bot
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/95473aa866aa48f39ec587d71c3ec4f1)](https://app.codacy.com/gh/Sigmanificient/SimplePythonBot?utm_source=github.com&utm_medium=referral&utm_content=Sigmanificient/SimplePythonBot&utm_campaign=Badge_Grade_Settings)
 [![CodeFactor](https://www.codefactor.io/repository/github/sigmanificient/simplepythonbot/badge)](https://www.codefactor.io/repository/github/sigmanificient/simplepythonbot)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Sigmanificient/SimplePythonBot)
 ![GitHub repo size](https://img.shields.io/github/repo-size/Sigmanificient/SimplePythonBot)
