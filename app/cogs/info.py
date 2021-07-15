@@ -6,7 +6,7 @@ from discord.ext import commands
 
 
 class Info(commands.Cog):
-    """ A template cog """
+    """Group of commands related to information on the bot."""
 
     def __init__(self, client):
         self.client = client
@@ -16,7 +16,7 @@ class Info(commands.Cog):
         aliases=('all', 'all_cmds', 'cmds'),
         brief="List every command osf the bot"
     )
-    async def all_commands(self, ctx):
+    async def help_command(self, ctx):
         """ Provide a list of every command available command for the user,
         split by extensions and organized in alphabetical order.
         Will not show the event-only extensions """
@@ -60,60 +60,19 @@ class Info(commands.Cog):
         await ping_embed.edit(embed=ping_embed)
 
     @commands.command(
-        name="user",
-        aliases=("whois", "more"),
-        brief="return the user information"
-    )
-    async def user(self, ctx, user: discord.Member = None):
-        """ return the user information """
-        if user is None:
-            user = ctx.author
-
-        embed = self.client.embed(color=user.color)
-        embed.set_thumbnail(url=user.avatar_url)
-        embed.set_author(name=f"{user.name} Information", icon_url=user.avatar_url)
-
-        if user.nick is not None:
-            embed.add_field(name="> nickname", value=f"`{user.nick}`")
-
-        for name, value in {
-            "default avatar": user.default_avatar,
-            "platform": 'Mobile' if user.is_on_mobile() else 'computer',
-            "status": user.status,
-            "discriminator": user.discriminator,
-            "created date": user.created_at.strftime('%d %b. %Y'),
-            "joined date": user.joined_at.strftime('%d %b. %Y'),
-        }.items():
-            embed.add_field(name=f'> {name}', value=f'`{value}`')
-
-        if user.activity is not None:
-            embed.add_field(name=f'> Activity', value=user.activity.name)
-
-        if len(user.roles) < 50:
-            roles = ", ".join(f"{role.name}" for role in user.roles[:0: -1])
-        else:
-            roles = "too many roles"
-
-        embed.add_field(
-            name=f"> roles ({len(user.roles) - 1})",
-            value=f"```c\n{roles} ```",
-            inline=False
-        )
-
-        await ctx.send(embed=embed)
-
-    @commands.command(
         name='bot',
         brief="Display the bot information"
     )
-    async def info_bot(self, ctx):
+    async def client_information_command(self, ctx):
         """ Display the bot information """
-        _embed = self.client.embed(
-            title=f'{self.client.user.name} Bot Information',
-            description='\n'.join((
-                'This bot have been created, coded and is owned by Sigmanificient#3301',
-                self.client.user.created_at.strftime("> **Creation date** : %A %d %B %Y at %H:%M")
-            ))
+        info_embed = self.client.embed(
+            title=f'{self.client.user_command.name} Bot Information',
+            description='\n'.join(
+                (
+                    'This bot have been created, coded and is owned by Sigmanificient#3301',
+                    self.client.user_command.created_at.strftime("> **Creation date** : %A %d %B %Y at %H:%M")
+                )
+            )
         )
 
         for key, val in {
@@ -122,9 +81,9 @@ class Info(commands.Cog):
             'Commands': len(self.client.commands),
             'Extensions': len(self.client.cogs)
         }.items():
-            _embed.add_field(name=key, value=f'> `{val}`', inline=True)
+            info_embed.add_field(name=key, value=f'> `{val}`', inline=True)
 
-        await ctx.send(embed=_embed)
+        await ctx.send(embed=info_embed)
 
     @commands.command(
         name="invite",
@@ -140,12 +99,11 @@ class Info(commands.Cog):
                         "> Click this link to invite this bot on your servers !",
                         "You need to have permissions on the server to use the link",
                         "[invite me now](https://discord.com/api/oauth2/authorize?client_"
-                        f"id={self.client.user.id}&permissions=8&scope=bot)"
+                        f"id={self.client.user_command.id}&permissions=8&scope=bot)"
                     )
                 )
             )
         )
-
 
 
 def setup(client):

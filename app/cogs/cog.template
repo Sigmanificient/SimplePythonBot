@@ -1,7 +1,7 @@
 from discord.ext import commands
 
 
-class Utils(commands.Cog):
+class TemplateCog(commands.Cog):
     """ A template cog """
 
     def __init__(self, client):
@@ -9,4 +9,4 @@ class Utils(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Utils(client))
+    client.add_cog(TemplateCog(client))
