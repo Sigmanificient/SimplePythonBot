@@ -1,9 +1,8 @@
-from time import perf_counter
 from platform import python_version
+from time import perf_counter
 
 import discord
 from discord.ext import commands
-from discord.ext.commands import Cog
 
 from app.bot import Bot
 from app.utils.embed import Embed
@@ -13,6 +12,7 @@ class Info(commands.Cog):
     """Group of commands related to information on the bot."""
 
     def __init__(self, client: Bot) -> None:
+        """Initialise the Information cog."""
         self.client: Bot = client
 
     @commands.command(
@@ -21,8 +21,9 @@ class Info(commands.Cog):
         brief="List every command osf the bot"
     )
     async def help_command(self, ctx: commands.Context) -> None:
-        """Provide a list of every command available command for the user,
-        split by extensions and organized in alphabetical order.
+        """Provide a list of every command available command for the user.
+
+        Command are split by extensions and organized in alphabetical order.
         Will not show the event-only extensions."""
 
         help_embed: Embed = self.client.embed(
@@ -47,6 +48,7 @@ class Info(commands.Cog):
     )
     async def ping_command(self, ctx: commands.Context) -> None:
         """Get the latency of the client converted in milliseconds.
+
         An dynamically colored ball will show in the image in function of the ping.
         Give also worst, best and daily average ping."""
         ping_embed = self.client.embed(
