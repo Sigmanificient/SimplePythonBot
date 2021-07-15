@@ -16,7 +16,6 @@ class Info(commands.Cog):
         aliases=('all', 'all_cmds', 'cmds'),
         brief="List every command osf the bot"
     )
-    @commands.cooldown(2, 60, commands.BucketType.user)
     async def all_commands(self, ctx):
         """ Provide a list of every command available command for the user,
         split by extensions and organized in alphabetical order.
@@ -72,11 +71,7 @@ class Info(commands.Cog):
 
         embed = self.client.embed(color=user.color)
         embed.set_thumbnail(url=user.avatar_url)
-
-        embed.set_author(
-            name=f"{user.name}%s Information" % ("'" if user.name.endswith("s") else "'s"),
-            icon_url=user.avatar_url
-        )
+        embed.set_author(name=f"{user.name} Information", icon_url=user.avatar_url)
 
         if user.nick is not None:
             embed.add_field(name="> nickname", value=f"`{user.nick}`")
@@ -100,7 +95,7 @@ class Info(commands.Cog):
             roles = "too many roles"
 
         embed.add_field(
-            name="> roles (%i)" % (len(user.roles) - 1),
+            name=f"> roles ({len(user.roles) - 1})",
             value=f"```c\n{roles} ```",
             inline=False
         )
@@ -137,24 +132,20 @@ class Info(commands.Cog):
         brief="A link to invite the bot"
     )
     async def invite(self, ctx):
-        invite_embed = self.client.embed(
-            title="Invite the Bot !",
-            description='\n'.join((
-                "> Click this link to invite this bot on your servers !",
-                "You need to have permissions on the server to use the link",
-                "[invite me now](https://discord.com/api/oauth2/authorize?client_"
-                f"id={self.client.user.id}&permissions=8&scope=bot)"
-            ))
+        await ctx.send(
+            embed=self.client.embed(
+                title="Invite the Bot !",
+                description='\n'.join(
+                    (
+                        "> Click this link to invite this bot on your servers !",
+                        "You need to have permissions on the server to use the link",
+                        "[invite me now](https://discord.com/api/oauth2/authorize?client_"
+                        f"id={self.client.user.id}&permissions=8&scope=bot)"
+                    )
+                )
+            )
         )
 
-        await ctx.send(embed=invite_embed)
-
-    @commands.Cog.listener()
-    async def on_command_error(self, ctx: commands.context, error):
-        if isinstance(error, commands.CommandOnCooldown):
-            await ctx.send(
-                f"> *Please wait* `{error.retry_after:.2f}` *seconds before using that command again.*"
-            )
 
 
 def setup(client):
