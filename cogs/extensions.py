@@ -10,7 +10,6 @@ STATUS: tuple = ("🟥 disabled", "🟩 active")
 
 class Extensions(commands.Cog):
     """ One extension to rule them all """
-    hidden: bool = True
 
     def __init__(self, client):
         self.client = client

@@ -7,7 +7,6 @@ from discord.ext import commands
 
 class Info(commands.Cog):
     """ A template cog """
-    hidden: bool = False
 
     def __init__(self, client):
         self.client = client
@@ -99,7 +98,7 @@ class Info(commands.Cog):
             embed.add_field(name=f'> Activity', value=user.activity.name)
 
         if len(user.roles) < 50:
-            roles = ", ".join([f"{role.name}" for role in user.roles[:0: -1]])
+            roles = ", ".join(f"{role.name}" for role in user.roles[:0: -1])
         else:
             roles = "too many roles"
 
