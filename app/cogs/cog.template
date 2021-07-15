@@ -11,4 +11,5 @@ class TemplateCog(commands.Cog):
 
 
 def setup(client: Bot) -> None:
+    """Load the extension into the bot."""
     client.add_cog(TemplateCog(client))

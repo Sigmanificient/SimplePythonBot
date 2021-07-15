@@ -96,7 +96,7 @@ class Extensions(commands.Cog):
     )
     @commands.is_owner()
     async def list_cogs(self, ctx: commands.Context) -> None:
-        """ Returns a list of all enabled and disabled extensions. """
+        """Returns a list of all enabled and disabled extensions."""
         cogs_list_embed: Embed = self.client.embed(
             title="All extensions",
             description='>>> %s' % '\n'.join(STATUS)
@@ -113,9 +113,11 @@ class Extensions(commands.Cog):
 
     @staticmethod
     async def on_command_error(ctx: commands.Context, error: Exception) -> None:
+        """Handle is owner errors."""
         if isinstance(error, commands.NotOwner):
             await ctx.send("You do not own this bot.")
 
 
 def setup(client: Bot) -> None:
+    """Load the extension into the bot."""
     client.add_cog(Extensions(client))

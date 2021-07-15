@@ -11,7 +11,7 @@ from app.utils.logging import log, warn
 class Bot(commands.Bot):
 
     def __init__(self, prefix) -> None:
-        """Initializing bot and load extensions"""
+        """Initializing bot and load extensions."""
         super(Bot, self).__init__(
             command_prefix=prefix,
             intents=discord.Intents.all()
@@ -25,7 +25,7 @@ class Bot(commands.Bot):
         """Loading every extensions in cogs folder."""
         log('Loading bot extensions')
 
-        for filename in os.listdir("app/cogs"):  # Loads every extensions.
+        for filename in os.listdir("app/cogs"):
             if not filename.endswith(".py"):
                 continue
 
@@ -43,14 +43,16 @@ class Bot(commands.Bot):
             warn(f"Could not load component '{name}' due to {error.__cause__}")
 
     def run(self) -> None:
-        """starting client with the token given in dotenv."""
+        """Starting client with the token given in dotenv."""
         super().run(dotenv.dotenv_values('.env').get('TOKEN'))
 
     async def on_connect(self) -> None:
+        """Event called when bot Successfully connects to discord account."""
         log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
         self.set_activity.start()
 
     async def on_ready(self) -> None:
+        """Event called when bot is ready to be used."""
         log(f"{self.user} Ready after {time.perf_counter():,.3f}s")
 
     @tasks.loop(seconds=10)

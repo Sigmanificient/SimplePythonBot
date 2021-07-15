@@ -8,13 +8,16 @@ if TYPE_CHECKING:
 
 
 class Embed(discord.Embed):
+    """A Embed wrapper class."""
 
     @classmethod
     def load(cls, client: Bot) -> Type[Embed]:
+        """Loading required for automatic footers."""
         cls.client: Bot = client
         return cls
 
     def __init__(self, **kwargs: Tuple[str]) -> None:
+        """Initializing a Embed with custom footer."""
         super().__init__(**kwargs)
 
         self.set_footer(

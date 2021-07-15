@@ -111,5 +111,6 @@ class Info(commands.Cog):
         )
 
 
-def setup(client):
+def setup(client: Bot) -> None:
+    """Load the extension into the bot."""
     client.add_cog(Info(client))
