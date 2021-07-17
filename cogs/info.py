@@ -4,8 +4,8 @@ from time import perf_counter
 import discord
 from discord.ext import commands
 
-from app.bot import Bot
-from app.utils.embed import Embed
+from bot import Bot
+from utils.embed import Embed
 
 
 class Info(commands.Cog):

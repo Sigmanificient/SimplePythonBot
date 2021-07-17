@@ -4,7 +4,7 @@ from typing import Type, Tuple, TYPE_CHECKING
 import discord
 
 if TYPE_CHECKING:
-    from app.bot import Bot
+    from bot import Bot
 
 
 class Embed(discord.Embed):

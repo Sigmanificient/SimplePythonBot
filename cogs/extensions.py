@@ -5,8 +5,8 @@ from typing import Optional
 from discord import Color
 from discord.ext import commands
 
-from app.bot import Bot
-from app.utils.embed import Embed
+from bot import Bot
+from utils.embed import Embed
 
 STATUS: tuple = ("🟥 disabled", "🟩 active")
 
@@ -28,8 +28,6 @@ class Extensions(commands.Cog):
         result_embed: Optional[Embed] = None
 
         try:
-            print(cog)
-
             if _type != 'load':
                 self.client.unload_extension(cog)
 

@@ -4,8 +4,8 @@ import time
 import dotenv
 import discord
 from discord.ext import commands, tasks
-from app.utils.embed import Embed
-from app.utils.logging import log, warn
+from utils.embed import Embed
+from utils.logging import log, warn
 
 
 class Bot(commands.Bot):
@@ -25,7 +25,7 @@ class Bot(commands.Bot):
         """Loading every extensions in cogs folder."""
         log('Loading bot extensions')
 
-        for filename in os.listdir("app/cogs"):
+        for filename in os.listdir("cogs"):
             if not filename.endswith(".py"):
                 continue
 
@@ -37,14 +37,14 @@ class Bot(commands.Bot):
     def load_extension(self, name, *_) -> None:
         """Loads a given extension with a safe guard."""
         try:
-            super().load_extension(f"app.cogs.{name}")
+            super().load_extension(f"cogs.{name}")
 
         except commands.ExtensionFailed as error:
             warn(f"Could not load component '{name}' due to {error.__cause__}")
 
     def unload_extension(self, name, *_) -> None:
         """Unloads a given extension."""
-        super().unload_extension(f"app.cogs.{name}")
+        super().unload_extension(f"cogs.{name}")
 
     def run(self) -> None:
         """Starting client with the token given in dotenv."""
@@ -68,3 +68,13 @@ class Bot(commands.Bot):
                 name=f"{self.command_prefix}help ◈ ping: {self.latency * 1e3:.2f} ms"
             )
         )
+
+
+def main() -> None:
+    """Entry point to load the app."""
+    client: Bot = Bot('&')
+    client.run()
+
+
+if __name__ == '__main__':
+    main()
