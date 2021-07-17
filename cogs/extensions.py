@@ -117,7 +117,7 @@ class Extensions(commands.Cog):
 
     @staticmethod
     async def on_command_error(ctx: commands.Context, error: Exception) -> None:
-        """Handle is owner errors."""
+        """Handle the owner errors."""
 
         if isinstance(error, commands.NotOwner):
             await ctx.send("You do not own this bot.")

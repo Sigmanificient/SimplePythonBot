@@ -64,7 +64,7 @@ class Bot(commands.Bot):
         """Prints a formatted log message."""
         print(f"[{datetime.now():%d/%b/%Y:%H:%M:%S}]", *args)
 
-    def embed(self, **kwargs):
+    def embed(self, **kwargs) -> discord.Embed:
         return discord.Embed(**kwargs).set_footer(
             text=f'{self.user.name} - {self.command_prefix}help for more information',
             icon_url=self.user.avatar_url
