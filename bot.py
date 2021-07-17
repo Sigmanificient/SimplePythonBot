@@ -1,11 +1,11 @@
 import os
 import time
+from datetime import datetime
+from typing import Union, Any, Tuple
 
 import dotenv
 import discord
 from discord.ext import commands, tasks
-from utils.embed import Embed
-from utils.logging import log, warn
 
 
 class Bot(commands.Bot):
@@ -17,22 +17,21 @@ class Bot(commands.Bot):
             intents=discord.Intents.all()
         )
 
-        self.embed = Embed.load(self)
         self.remove_command('help')
         self.load_extensions()
 
     def load_extensions(self) -> None:
         """Loading every extensions in cogs folder."""
-        log('Loading bot extensions')
+        self.log('Loading bot extensions')
 
         for filename in os.listdir("cogs"):
             if not filename.endswith(".py"):
                 continue
 
             self.load_extension(filename[:-3])
-            log('-', filename)
+            self.log('-', filename)
 
-        log(len(self.cogs), 'extensions loaded')
+        self.log(len(self.cogs), 'extensions loaded')
 
     def load_extension(self, name, *_) -> None:
         """Loads a given extension with a safe guard."""
@@ -40,24 +39,20 @@ class Bot(commands.Bot):
             super().load_extension(f"cogs.{name}")
 
         except commands.ExtensionFailed as error:
-            warn(f"Could not load component '{name}' due to {error.__cause__}")
+            print("[Warning]", f"Could not load component '{name}' due to {error.__cause__}")
 
     def unload_extension(self, name, *_) -> None:
         """Unloads a given extension."""
         super().unload_extension(f"cogs.{name}")
 
-    def run(self) -> None:
-        """Starting client with the token given in dotenv."""
-        super().run(dotenv.dotenv_values('.env').get('TOKEN'))
-
     async def on_connect(self) -> None:
         """Event called when bot Successfully connects to discord account."""
-        log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
+        self.log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
         self.set_activity.start()
 
     async def on_ready(self) -> None:
         """Event called when bot is ready to be used."""
-        log(f"{self.user} Ready after {time.perf_counter():,.3f}s")
+        self.log(f"{self.user} Ready after {time.perf_counter():,.3f}s")
 
     @tasks.loop(seconds=10)
     async def set_activity(self) -> None:
@@ -69,11 +64,21 @@ class Bot(commands.Bot):
             )
         )
 
+    def log(*args: Union[Any, Tuple[Any]]) -> None:
+        """Prints a formatted log message."""
+        print(f"[{datetime.now():%d/%b/%Y:%H:%M:%S}]", *args)
+
+    def embed(self, **kwargs):
+        return discord.Embed(**kwargs).set_footer(
+            text=f'{self.user.name} - {self.command_prefix}help for more information',
+            icon_url=self.user.avatar_url
+        )
+
 
 def main() -> None:
     """Entry point to load the app."""
     client: Bot = Bot('&')
-    client.run()
+    client.run(dotenv.dotenv_values('.env').get('TOKEN'))
 
 
 if __name__ == '__main__':
