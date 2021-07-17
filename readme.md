@@ -14,8 +14,6 @@ The bot token should be in a `.env` file such as the `.env.example` file:
 TOKEN=YOUR_BOT_TOKEN
 ```
 
-The Storage directory can also contain db & json.
-
 ## Default commands
 -   `help`, `bot`, `invite`, `ping`, `load`, `unload`, `reload`
 
