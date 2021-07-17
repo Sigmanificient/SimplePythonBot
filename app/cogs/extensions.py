@@ -1,6 +1,6 @@
 from os import listdir
 from time import perf_counter
-from typing import Optional
+from typing import Optional, Tuple
 
 from discord import Color
 from discord.ext import commands
@@ -8,7 +8,7 @@ from discord.ext import commands
 from app.bot import Bot
 from app.utils.embed import Embed
 
-STATUS: tuple = ("🟥 disabled", "🟩 active")
+STATUS: Tuple[str] = ("🟥 disabled", "🟩 active")
 
 
 class Extensions(commands.Cog):
