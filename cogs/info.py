@@ -2,10 +2,10 @@ from platform import python_version
 from time import perf_counter
 
 import discord
+from discord import Embed
 from discord.ext import commands
 
 from bot import Bot
-from utils.embed import Embed
 
 
 class Info(commands.Cog):

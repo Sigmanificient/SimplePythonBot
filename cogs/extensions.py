@@ -2,13 +2,12 @@ from os import listdir
 from time import perf_counter
 from typing import Optional
 
-from discord import Color
+from discord import Color, Embed
 from discord.ext import commands
 
 from bot import Bot
-from utils.embed import Embed
 
-STATUS: tuple = ("🟥 disabled", "🟩 active")
+STATUS: tuple[str, str] = ("🟥 disabled", "🟩 active")
 
 
 class Extensions(commands.Cog):
@@ -29,10 +28,10 @@ class Extensions(commands.Cog):
 
         try:
             if _type != 'load':
-                self.client.unload_extension(cog)
+                self.client.unload_extension(f"cogs.{cog}")
 
             if _type != 'unload':
-                self.client.load_extension(cog)
+                self.client.load_extension(f"cogs.{cog}")
 
         except Exception as e:
             result_embed: Embed = self.client.embed(

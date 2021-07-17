@@ -28,22 +28,17 @@ class Bot(commands.Bot):
             if not filename.endswith(".py"):
                 continue
 
-            self.load_extension(filename[:-3])
             self.log('-', filename)
+            name: str = filename[:-3]
 
-        self.log(len(self.cogs), 'extensions loaded')
+            try:
+                super().load_extension(f"cogs.{name}")
 
-    def load_extension(self, name, *_) -> None:
-        """Loads a given extension with a safe guard."""
-        try:
-            super().load_extension(f"cogs.{name}")
+            except commands.ExtensionFailed as error:
+                print("[Warning]", f"Could not load component '{name}' due to {error.__cause__}")
 
-        except commands.ExtensionFailed as error:
-            print("[Warning]", f"Could not load component '{name}' due to {error.__cause__}")
-
-    def unload_extension(self, name, *_) -> None:
-        """Unloads a given extension."""
-        super().unload_extension(f"cogs.{name}")
+            else:
+                self.log(len(self.cogs), 'extensions loaded')
 
     async def on_connect(self) -> None:
         """Event called when bot Successfully connects to discord account."""
