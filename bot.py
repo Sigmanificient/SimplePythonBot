@@ -12,16 +12,9 @@ class Bot(commands.Bot):
 
     def __init__(self, prefix) -> None:
         """Initializing bot and load extensions."""
-        super(Bot, self).__init__(
-            command_prefix=prefix,
-            intents=discord.Intents.all()
-        )
-
+        super(Bot, self).__init__(command_prefix=prefix)
         self.remove_command('help')
-        self.load_extensions()
 
-    def load_extensions(self) -> None:
-        """Loading every extensions in cogs folder."""
         self.log('Loading bot extensions')
 
         for filename in os.listdir("cogs"):
