@@ -9,7 +9,7 @@
 
 Make sure to follow the requirements in `requirements.txt`
 
-The bot token should be in a `.env` file such as the `.env.example` file:
+The bot token should be in a `.env` file such as the `.env.template` file:
 ```dotenv
 TOKEN=YOUR_BOT_TOKEN
 ```
