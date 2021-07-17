@@ -59,6 +59,7 @@ class Bot(commands.Bot):
             )
         )
 
+    @staticmethod
     def log(*args: Union[Any, Tuple[Any]]) -> None:
         """Prints a formatted log message."""
         print(f"[{datetime.now():%d/%b/%Y:%H:%M:%S}]", *args)
