@@ -51,7 +51,7 @@ class Bot(commands.Bot):
         super().run(dotenv.dotenv_values('.env').get('TOKEN'))
 
     async def on_connect(self) -> None:
-        """Event called when bot Successfully connects to discord account."""
+        """Event called when bot connects to the discord account."""
         log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
         self.set_activity.start()
 
@@ -65,6 +65,9 @@ class Bot(commands.Bot):
             status=discord.Status.online,
             activity=discord.Activity(
                 type=discord.ActivityType.watching,
-                name=f"{self.command_prefix}help ◈ ping: {self.latency * 1e3:.2f} ms"
+                name=(
+                    f"{self.command_prefix}help"
+                    f" ◈ ping: {self.latency * 1e3:.2f} ms"
+                )
             )
         )
