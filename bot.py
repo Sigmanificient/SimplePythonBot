@@ -28,13 +28,17 @@ class Bot(commands.Bot):
                 super().load_extension(f"cogs.{name}")
 
             except commands.ExtensionFailed as error:
-                print("[Warning]", f"Could not load component '{name}' due to {error.__cause__}")
+                print(
+                    "[Warning]",
+                    f"Could not load component '{name}'"
+                    f" due to {error.__cause__}"
+                )
 
             else:
                 self.log(len(self.cogs), 'extensions loaded')
 
     async def on_connect(self) -> None:
-        """Event called when bot Successfully connects to discord account."""
+        """Event called when bot connects to discord the account."""
         self.log(f"Logged in as {self.user} after {time.perf_counter():,.3f}s")
         self.set_activity.start()
 
@@ -48,7 +52,10 @@ class Bot(commands.Bot):
             status=discord.Status.online,
             activity=discord.Activity(
                 type=discord.ActivityType.watching,
-                name=f"{self.command_prefix}help ◈ ping: {self.latency * 1e3:.2f} ms"
+                name=(
+                    f"{self.command_prefix}help"
+                    f" ◈ ping: {self.latency * 1e3:.2f} ms"
+                )
             )
         )
 
@@ -59,7 +66,10 @@ class Bot(commands.Bot):
 
     def embed(self, **kwargs) -> discord.Embed:
         return discord.Embed(**kwargs).set_footer(
-            text=f'{self.user.name} - {self.command_prefix}help for more information',
+            text=(
+                f'{self.user.name} - {self.command_prefix}help'
+                ' for more information'
+            ),
             icon_url=self.user.avatar_url
         )
 
